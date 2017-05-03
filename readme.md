@@ -1,32 +1,51 @@
-## Use JPA + Hibernate + MySQL in Spring Boot
+This is a sample online BUS Boking system project with very basic bus booking functionality. Developed using Spring boot and JPA.
 
-See here for more informations: 
-http://blog.netgloo.com/2014/10/06/spring-boot-data-access-with-jpa-hibernate-and-mysql/
+Database used - MariaDB.
 
-### Usage
 
-- Run the application and go on http://localhost:8080/
-- Use the following urls to invoke controllers methods and see the interactions
-  with the database:
-    * `/user/save?email=[email]&name=[name]`: create a new user with an 
-      auto-generated id and email and name as passed values.
-    * `/user/delete?id=[id]`: delete the user with the passed id.
-    * `/user/get-by-email?email=[email]`: retrieve the id for the user with the
-      passed email address.
 
-### Build and run
+Feature Endpoints:
 
-#### Configurations
+1. Register user:
+http://localhost:8080/user/register POST
+Sample request body:
+{
+	"userEmail":"chandan493@gmail.com",
+	"userName":"chandan",
+	"userLastName":"ghosh"
+}
 
-Open the `application.properties` file and set your own configurations for the
-database connection.
+2. Adding BUS:
+http://localhost:8080/bus/addbus/ POST
+Sample request body:
+{
+	"busOrigin":"Bangalore",
+	"busDestination":"GOA",
+	"noOfSeat":70,
+	"busDate":"13-05-2017"
+}
+3. Search a bus with filters (origin,destination,date,no of seats)
+http://localhost:8080/bus/search/Bangalore/GOA/13-05-2017/2 GET
 
-#### Prerequisites
+4. Book a bus using bus id found in search
+http://localhost:8080/bus/bookBus POST
+Sample request body:
+{
+	"busId":3,
+	"userEmailId":"chandan493@gmail.com",
+	"journeyDate":"13-05-2017",
+	"seats":2
+}
 
-- Java 7
-- Maven 3
+5. Get booking details of a user email id
+http://localhost:8080/user/bookingDetails POST
+Sample request body:
+{
+	"userEmail":"chandan493@gmail.com"
+}
 
-#### From terminal
+
+
 
 Go on the project's root folder, then type:
 
